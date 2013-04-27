@@ -30,6 +30,8 @@ public class Environment : MonoBehaviour {
 	private Color centerColor;
 	private Color leftColor = Color.white;
 	private Color rightColor = Color.black;
+	private Color topColor = Color.white;
+	private Color bottomColor = Color.black;
 	
 	public static Color TargetColor {
 		get {
@@ -70,10 +72,16 @@ public class Environment : MonoBehaviour {
 		}
 	}
 	
+	public static bool inSecondRandomPhase {
+		get {
+			return Level >= 12 && Level <= 15;
+		}
+	}
+	
 	public static void nextLevel() {
 		++singleton.level;
 		Debug.Log("Level up! Now: " + singleton.level);
-		if (singleton.level <= FIRST_LEVEL_GROUP) {
+		if (singleton.level <= FIRST_LEVEL_GROUP || inSecondRandomPhase) {
 			singleton.oldCenter = Input.mousePosition;
 			singleton.centerColor = singleton.targetColor;
 			do {
@@ -110,12 +118,20 @@ public class Environment : MonoBehaviour {
 			lastColor = Color.Lerp(singleton.leftColor, singleton.rightColor, Input.mousePosition.x / Screen.width);
 			WinningWatcher.setPct((lastColor.ToVector() - TargetColor.ToVector()).sqrMagnitude);
 		}
-		else if (singleton.level <= FIRST_LEVEL_GROUP) {
+		else if (singleton.level <= FIRST_LEVEL_GROUP || inSecondRandomPhase) {
 			if (Input.mousePosition.x > singleton.oldCenter.x) {
 				lastColor = Color.Lerp(singleton.centerColor, singleton.rightColor, (Input.mousePosition.x - singleton.oldCenter.x) / (Screen.width - singleton.oldCenter.x));
 			}
 			else {
 				lastColor = Color.Lerp(singleton.leftColor, singleton.centerColor, Input.mousePosition.x / singleton.oldCenter.x);
+			}
+			if (inSecondRandomPhase) {
+				if (Input.mousePosition.y > singleton.oldCenter.y) {
+					lastColor = Color.Lerp(lastColor, singleton.bottomColor, (Input.mousePosition.y - singleton.oldCenter.y) / (Screen.height - singleton.oldCenter.y));
+				}
+				else {
+					lastColor = Color.Lerp(singleton.topColor, lastColor, Input.mousePosition.y / singleton.oldCenter.y);
+				}
 			}
 			WinningWatcher.setPct((lastColor.ToVector() - TargetColor.ToVector()).sqrMagnitude);
 		}
