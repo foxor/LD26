@@ -54,7 +54,11 @@ public class Environment : MonoBehaviour {
 		get {
 			switch (singleton.level) {
 			case 7:
-				return new Vector3(Screen.width * 0.8f, Screen.height * 0.7f, 0f);
+				return new Vector3(Screen.width * 0.8f, Screen.height * 0.3f, 0f);
+			case 9:
+				return new Vector3(Screen.width * 0.43f, Screen.height * 0.3f, 0f);
+			case 11:
+				return new Vector3(Screen.width * 0.16f, Screen.height * 0.3f, 0f);
 			}
 			return Vector3.zero;
 		}
@@ -120,7 +124,8 @@ public class Environment : MonoBehaviour {
 			WinningWatcher.setPct(MouseFollower.TimeHeld);
 		}
 		else if (singleton.level == 7 || singleton.level == 9 || singleton.level == 11) {
-			//WinningWatcher.setPct((Input.mousePosition - hotSpot).sqrMagnitude / 100f);
+			lastColor = TargetColor;
+			WinningWatcher.setPct(Mathf.Pow((Input.mousePosition - hotSpot).sqrMagnitude / 10000f, 4f));
 		}
 		return lastColor;
 	}

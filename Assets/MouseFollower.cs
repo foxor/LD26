@@ -5,7 +5,7 @@ public class MouseFollower : MonoBehaviour {
 	
 	private static MouseFollower singleton;
 	
-	private const float HOLD_TIME_MODIFIER = 1f;
+	private const float HOLD_TIME_MODIFIER = 0.3f;
 	
 	public float holdTime;
 	
@@ -29,7 +29,7 @@ public class MouseFollower : MonoBehaviour {
 	
 	public static float TimeHeld {
 		get {
-			return 1f - (singleton.holdTime / HOLD_TIME_MODIFIER);
+			return 0.5f - (singleton.holdTime / HOLD_TIME_MODIFIER);
 		}
 	}
 	
@@ -40,6 +40,9 @@ public class MouseFollower : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButton(0)) {
 			holdTime += Time.deltaTime;
+		}
+		else {
+			holdTime = 0f;
 		}
 		if (!WinningWatcher.Locked) {
 			renderer.material.color = Environment.getColor();

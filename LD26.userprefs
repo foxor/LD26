@@ -1,12 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Environment.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GoalText.cs">
     <Files>
-      <File FileName="Assets\MouseFollower.cs" Line="31" Column="94" />
-      <File FileName="Assets\Environment.cs" Line="8" Column="54" />
+      <File FileName="Assets\MouseFollower.cs" Line="23" Column="2" />
+      <File FileName="Assets\Environment.cs" Line="111" Column="39" />
       <File FileName="Assets\WinningWatcher.cs" Line="48" Column="15" />
-      <File FileName="Assets\GoalText.cs" Line="20" Column="4" />
+      <File FileName="Assets\GoalText.cs" Line="34" Column="3" />
       <File FileName="Assets\SoundManager.cs" Line="6" Column="16" />
+      <File FileName="Assets\HideCursor.cs" Line="8" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
