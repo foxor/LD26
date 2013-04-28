@@ -36,5 +36,13 @@ public class Overlay : MonoBehaviour {
 		else if (Environment.Level == 20) {
 			GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), potato);
 		}
+		else if (Environment.Level == 42) {
+			GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+			GUILayout.BeginArea(new Rect(0f, Screen.height * 0.4f, Screen.width, Screen.height * 0.6f));
+			GUILayout.Label("Created by Isaac James");
+			GUILayout.Label("For Ludum Dare 26");
+			GUILayout.Label("Music by Ramiz Haddad");
+			GUILayout.EndArea();
+		}
 	}
 }

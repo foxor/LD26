@@ -17,8 +17,8 @@ public class Puzzle : MonoBehaviour {
 	
 	private readonly float[] pcts = {
 		0.02f,
+		0.011f,
 		0.01f,
-		0.008f,
 		0f
 	};
 	

@@ -88,9 +88,10 @@ public class Environment : MonoBehaviour {
 	}
 	
 	public static void nextLevel() {
-		++singleton.level;
+		singleton.level %= 42;
+		singleton.level++;
 		Debug.Log("Level up! Now: " + singleton.level);
-		if (singleton.level <= FIRST_LEVEL_GROUP || inSecondRandomPhase) {
+		if (Level > 1 && (singleton.level <= FIRST_LEVEL_GROUP || inSecondRandomPhase)) {
 			singleton.oldCenter = Input.mousePosition;
 			singleton.centerColor = singleton.targetColor;
 			do {
@@ -145,11 +146,24 @@ public class Environment : MonoBehaviour {
 		else if (Level == 16) {
 			singleton.targetColor = randomColor();
 		}
-		else if (Level > 20 && Level < 42) {
+		else if (Level > 20 && Level < 41) {
 			singleton.targetColor = History.getLevelColor(Level - 21);
 		}
+		else if (Level == 41) {
+			singleton.targetColor = Color.black;
+		}
+		else if (Level == 42) {
+			singleton.targetColor = Color.white;
+		}
+		else if (Level == 1) {
+			singleton.leftColor = Color.white;
+			singleton.rightColor = Color.black;
+			singleton.targetColor = Color.Lerp(Color.white, Color.black, Random.Range(0.3f, 0.7f));
+		}
 		History.SubmitNewLevelColor(singleton.targetColor);
-		WinningWatcher.setPct(1000f);
+		if (Level <= 20 || Level >= 41) {
+			WinningWatcher.setPct(1000f);
+		}
 		GoalText.LerpTextColor();
 	}
 	
@@ -190,6 +204,9 @@ public class Environment : MonoBehaviour {
 		else if (Level > 20 && Level < 42) {
 			lastColor = TargetColor;
 			WinningWatcher.setPct(0f);
+		}
+		else if (Level == 42) {
+			lastColor = TargetColor;
 		}
 		return lastColor;
 	}

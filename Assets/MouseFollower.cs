@@ -69,6 +69,9 @@ public class MouseFollower : MonoBehaviour {
 		if (Environment.squareTime()) {
 			pos.y = Mathf.Lerp(cameraHeight / -2f, cameraHeight / 2f, Input.mousePosition.y / ((float)Screen.height));
 		}
+		else {
+			pos.y = 0f;
+		}
 		transform.position = pos;
 	}
 }

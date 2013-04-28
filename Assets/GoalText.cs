@@ -20,7 +20,7 @@ public class GoalText : MonoBehaviour {
 		"FIND",
 		"FIND",
 		"FIND",
-		"CHOOSE",
+		"SOLVE",
 		"FIND",
 		"FIND",
 		"FIND",
