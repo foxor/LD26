@@ -22,7 +22,7 @@ public class Environment : MonoBehaviour {
 	// 41 same as 21 - 40, but set target to black instead of replaying
 	// 42, Shake: Show credits, set target to white.  OnWin return to level 1
 	
-	private const float RESTRICTED_WIN_AREA = 0.7f;
+	private const float RESTRICTED_WIN_AREA = 0.3f;
 	private const int FIRST_LEVEL_GROUP = 5;
 	private const float COLOR_DIFFERENCE_THRESHOLD = 0.6f;
 	
@@ -145,6 +145,10 @@ public class Environment : MonoBehaviour {
 		else if (Level == 16) {
 			singleton.targetColor = randomColor();
 		}
+		else if (Level > 20 && Level < 42) {
+			singleton.targetColor = History.getLevelColor(Level - 21);
+		}
+		History.SubmitNewLevelColor(singleton.targetColor);
 		WinningWatcher.setPct(1000f);
 		GoalText.LerpTextColor();
 	}
@@ -182,6 +186,10 @@ public class Environment : MonoBehaviour {
 		}
 		else if (Level == 16) {
 			lastColor = TargetColor;
+		}
+		else if (Level > 20 && Level < 42) {
+			lastColor = TargetColor;
+			WinningWatcher.setPct(0f);
 		}
 		return lastColor;
 	}

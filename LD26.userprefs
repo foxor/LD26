@@ -2,10 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Environment.cs">
     <Files>
-      <File FileName="Assets\Environment.cs" Line="171" Column="28" />
-      <File FileName="Assets\GoalText.cs" Line="23" Column="11" />
+      <File FileName="Assets\Environment.cs" Line="138" Column="54" />
+      <File FileName="Assets\GoalText.cs" Line="27" Column="10" />
       <File FileName="Assets\MouseFollower.cs" Line="35" Column="4" />
-      <File FileName="Assets\Overlay.cs" Line="14" Column="41" />
+      <File FileName="Assets\Overlay.cs" Line="41" Column="1" />
+      <File FileName="Assets\Puzzle.cs" Line="1" Column="1" />
+      <File FileName="Assets\WinningWatcher.cs" Line="2" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
