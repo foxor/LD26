@@ -7,12 +7,14 @@ public class Overlay : MonoBehaviour {
 	private Texture frisbee;
 	private Texture dog;
 	private Texture puzzle;
+	private Texture potato;
 
 	void Start () {
 		man = Resources.Load("ManAlone") as Texture;
 		frisbee = Resources.Load("Frisbee") as Texture;
 		dog = Resources.Load("Dog") as Texture;
 		puzzle = Resources.Load("Choice") as Texture;
+		potato = Resources.Load("Potato") as Texture;
 	}
 	
 	void Update () {
@@ -30,6 +32,9 @@ public class Overlay : MonoBehaviour {
 		}
 		else if (Environment.Level == 16) {
 			GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), puzzle);
+		}
+		else if (Environment.Level == 20) {
+			GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), potato);
 		}
 	}
 }

@@ -16,6 +16,11 @@ public class Environment : MonoBehaviour {
 	// 12 - 13, Find: box random sides, white top black bottom
 	// 14 - 15, Find: box random edges
 	// 16, Choose: target to yellow
+	// 17 - 19, Find: box random edges
+	// 20, Potatoe: doesn't change target or bg, just mouse over
+	// 21 - 40, Wait: play volume at full, just win the level immidiately, set target to replay previous 20
+	// 41 same as 21 - 40, but set target to black instead of replaying
+	// 42, Shake: Show credits, set target to white.  OnWin return to level 1
 	
 	private const float RESTRICTED_WIN_AREA = 0.7f;
 	private const int FIRST_LEVEL_GROUP = 5;
@@ -63,6 +68,8 @@ public class Environment : MonoBehaviour {
 				return new Vector3(Screen.width * 0.43f, Screen.height * 0.3f, 0f);
 			case 11:
 				return new Vector3(Screen.width * 0.16f, Screen.height * 0.3f, 0f);
+			case 20:
+				return new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
 			}
 			return Vector3.zero;
 		}
@@ -76,7 +83,7 @@ public class Environment : MonoBehaviour {
 	
 	public static bool inSecondRandomPhase {
 		get {
-			return Level >= 12 && Level <= 15;
+			return (Level >= 12 && Level <= 15) || (Level >= 17 && Level <= 19);
 		}
 	}
 	
@@ -131,7 +138,7 @@ public class Environment : MonoBehaviour {
 		else if (Level == 6 || Level == 8 || Level == 10) {
 			singleton.targetColor = BURGANDY;
 		}
-		else if (Level == 7 || Level == 9 || Level == 11) {
+		else if (Level == 7 || Level == 9 || Level == 11 || Level == 20) {
 			singleton.targetColor = randomColor();
 			MouseFollower.FadeIn();
 		}
@@ -169,7 +176,7 @@ public class Environment : MonoBehaviour {
 			lastColor = BURGANDY;
 			WinningWatcher.setPct(MouseFollower.TimeHeld);
 		}
-		else if (singleton.level == 7 || singleton.level == 9 || singleton.level == 11) {
+		else if (singleton.level == 7 || singleton.level == 9 || singleton.level == 11 || Level == 20) {
 			lastColor = TargetColor;
 			WinningWatcher.setPct(Mathf.Pow((Input.mousePosition - hotSpot).sqrMagnitude / 10000f, 4f));
 		}
