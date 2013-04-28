@@ -19,7 +19,8 @@ public class GoalText : MonoBehaviour {
 		"FIND",
 		"FIND",
 		"FIND",
-		"FIND"
+		"FIND",
+		"CHOOSE"
 	};
 	
 	private const float FONT_LERP_TIMER = 3f;
@@ -59,11 +60,12 @@ public class GoalText : MonoBehaviour {
 	
 	void OnGUI () {
 		GUI.skin.label.fontSize = 40;
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter;
 		if (!locked) {
 			CurColor = Environment.TargetColor;
 		}
 		GUI.skin.label.normal.textColor = CurColor;
-		GUILayout.BeginArea(new Rect(Screen.width / 2f - 85f, 0f, 170f, 40f));
+		GUILayout.BeginArea(new Rect(0f, 0f, Screen.width, 50f));
 		GUILayout.Label(INSTRUCTIONS[Environment.Level]);
 		GUILayout.EndArea();
 	}

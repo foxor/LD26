@@ -23,7 +23,6 @@ public class WinningWatcher : MonoBehaviour {
 	}
 	
 	public static void setPct (float colorDiff) {
-		Debug.Log("Pct set to " + colorDiff);
 		if (colorDiff < MAX_PCT_DIFFERENCE_SQUARED) {
 			singleton.targetWidth = MouseFollower.cameraWidth * 2f;
 		}

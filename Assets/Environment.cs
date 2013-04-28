@@ -15,12 +15,14 @@ public class Environment : MonoBehaviour {
 	// 11, Catch: rando color box, mouse over dog to expand
 	// 12 - 13, Find: box random sides, white top black bottom
 	// 14 - 15, Find: box random edges
+	// 16, Choose: target to yellow
 	
 	private const float RESTRICTED_WIN_AREA = 0.7f;
 	private const int FIRST_LEVEL_GROUP = 5;
 	private const float COLOR_DIFFERENCE_THRESHOLD = 0.6f;
 	
 	private static Color BURGANDY = new Color(1f, 43f / 255f, 60f / 255f, 1f);
+	private static Color YELLOW = new Color(1f, 221f / 255f, 2f / 255f, 1f);
 	
 	private static Environment singleton;
 	
@@ -101,11 +103,38 @@ public class Environment : MonoBehaviour {
 			else {
 				singleton.targetColor = Color.Lerp(singleton.leftColor, singleton.centerColor, newTarget / Input.mousePosition.x);
 			}
+			if (Level > 13) {
+				do {
+					singleton.topColor = randomColor();
+					singleton.bottomColor = randomColor();
+				} while (
+					(singleton.topColor.ToVector() - singleton.bottomColor.ToVector()).sqrMagnitude < COLOR_DIFFERENCE_THRESHOLD ||
+					(singleton.topColor.ToVector() - singleton.centerColor.ToVector()).sqrMagnitude < COLOR_DIFFERENCE_THRESHOLD ||
+					(singleton.centerColor.ToVector() - singleton.bottomColor.ToVector()).sqrMagnitude < COLOR_DIFFERENCE_THRESHOLD
+				);
+			}
+			if (inSecondRandomPhase) {
+				if (Random.Range(0f, 1f) * Screen.height > Input.mousePosition.y) {
+					singleton.targetColor = Color.Lerp(singleton.targetColor, singleton.bottomColor, Random.Range(0f, 1f));
+				}
+				else {
+					singleton.targetColor = Color.Lerp(singleton.targetColor, singleton.topColor, Random.Range(0f, 1f));
+				}
+			}
+			if (Level == 15) {
+				singleton.targetColor = YELLOW;
+				singleton.leftColor = YELLOW;
+				singleton.rightColor = YELLOW;
+			}
 		}
 		else if (Level == 6 || Level == 8 || Level == 10) {
 			singleton.targetColor = BURGANDY;
 		}
 		else if (Level == 7 || Level == 9 || Level == 11) {
+			singleton.targetColor = randomColor();
+			MouseFollower.FadeIn();
+		}
+		else if (Level == 16) {
 			singleton.targetColor = randomColor();
 		}
 		WinningWatcher.setPct(1000f);
@@ -142,6 +171,9 @@ public class Environment : MonoBehaviour {
 		else if (singleton.level == 7 || singleton.level == 9 || singleton.level == 11) {
 			lastColor = TargetColor;
 			WinningWatcher.setPct(Mathf.Pow((Input.mousePosition - hotSpot).sqrMagnitude / 10000f, 4f));
+		}
+		else if (Level == 16) {
+			lastColor = TargetColor;
 		}
 		return lastColor;
 	}
