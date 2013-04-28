@@ -94,10 +94,11 @@ public class Environment : MonoBehaviour {
 				(singleton.leftColor.ToVector() - singleton.centerColor.ToVector()).sqrMagnitude < COLOR_DIFFERENCE_THRESHOLD ||
 				(singleton.centerColor.ToVector() - singleton.rightColor.ToVector()).sqrMagnitude < COLOR_DIFFERENCE_THRESHOLD
 			);
-			float newTarget = Random.Range(0f, Screen.width * (1f - RESTRICTED_WIN_AREA));
-			if (newTarget > Input.mousePosition.x - Screen.width * RESTRICTED_WIN_AREA / 2f) {
-				newTarget -= Input.mousePosition.x;
-				newTarget += Screen.width * (RESTRICTED_WIN_AREA / 2f);
+			float newTarget = Random.Range(0f, 1f - RESTRICTED_WIN_AREA);
+			newTarget *= Screen.width;
+			newTarget += Input.mousePosition.x + RESTRICTED_WIN_AREA * Screen.width / 2f;
+			newTarget %= Screen.width;
+			if (newTarget > Input.mousePosition.x) {
 				singleton.targetColor = Color.Lerp(singleton.centerColor, singleton.rightColor, newTarget / (Screen.width - Input.mousePosition.x));
 			}
 			else {
